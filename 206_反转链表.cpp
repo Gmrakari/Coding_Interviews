@@ -1,4 +1,6 @@
-
+/*
+ * Date:2021-04-14 10:55
+ */
 
 /**
  * Definition for singly-linked list.
@@ -63,4 +65,20 @@ public:
         return newhead;
     }
 }; 
+
+/**
+ * Leetcode Author:Joy
+ *
+ */
+
+// Time 8ms, 99%
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *p;
+        for(p=NULL; head; swap(head,p))
+            swap(p,head->next);
+        return p;
+    }
+};
 
