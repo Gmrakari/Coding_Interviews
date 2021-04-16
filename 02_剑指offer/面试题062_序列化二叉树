@@ -1,0 +1,40 @@
+
+
+/*
+ * Date:2021-04-06 08:56
+ * Author:Gmrakari
+ * Project:面试题062_序列化二叉树
+ * 
+ */
+
+题目描述
+请实现两个函数，分别用来序列化和反序列化二叉树。这里没有规定序列化的方式
+
+void Serialize(BinaryTreeNode* pRoot,ostream& stream)
+{
+	if(pRoot == NULL)
+	{
+		stream << "$,";
+		return ;
+	}
+
+	stream << pRoot->m_nValue << ',';
+	Serialize(pRoot->m_pLeft,stream);
+	Serilize(pRoot->m_pRight,stream);
+}
+
+void Deserialize(BinaryTreeNode** Proot,istream& stream)
+{
+	int number;
+	if(ReadStream(stream,&number))
+	{
+		*pRoot = new BinaryTreeNode();
+		(*pRoot)->m_nValue = number;
+		(*pRoot)->m_pLeft = NULL;
+		(*pRoot)->m_pRight = NULL;
+
+		Deserialize(&((*pRoot)->m_pLeft),stream);
+		Deserialize(&((*pRoot)->m_pRight),stream);
+	}
+}
+

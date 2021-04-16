@@ -1,0 +1,114 @@
+
+/*
+ * Date:2021-03-19 09:16
+ * Author:Gmrakari
+ * Project:面试题056_链表中环的入口结点
+ * 
+ */
+#题目描述
+一个链表中包含环，请找出该链表的环的入口结点。
+
+struct ListNode
+{
+	int m_nValue;
+	ListNode* m_pNext;
+};
+
+面试题15_链表中倒数第k个结点
+
+ListNode* FindKthToTail(ListNode* pListHead,unsigned int k)
+{
+
+	if(pListHead == NULL || k == 0 )
+		return;
+
+	ListNode *pAhead = pListHead;
+	ListNode *pBehind = NULL;
+
+	for(unsigned int i = 0;i < k - 1;++i)
+	{
+		if(pAhead->m_pNext != NULL)
+			pAhead = pAhead->m_pNext;
+		else
+			return NULL;
+	}
+
+	pBehind = pListHead;
+
+	while(pAhead->m_pNext ！= NULL)
+	{
+		pAhead = pAhead->m_pNext;
+		pBehind = pBehind->m_pNext;
+	}
+	return pBehind;
+}
+
+用两个指针来解决问题。
+
+先定义连个指针p1,p2指向链表的头结点。
+如果链表中的环有n个结点，指针p1先在链表上向前移动n步，然后两个指针以相同的速度向前移动。
+当指针指向环的入口结点时，第一个指针已经围绕环走了一圈又回到了入口结点
+
+重点：
+如何得到环中结点的数目。
+用一快一慢两个指针。如果两个指针相遇，表明链表存在环。
+两个指针相遇的结点一定是在环中。
+可以从这个结点出发，一边继续向前移动一边计数，当再次回到这个结点时，就可以得到环中的结点数了。
+
+#找到相遇结点
+ListNode* MeetingNode(ListNode* pHead)
+{
+	if(pHead == NULL)
+		return NULL;
+
+	ListNode* pSlow = pHead->m_pNext;
+	if(pSlow == NULL)
+		return NULL;
+
+	ListNode* pFast = pSlow->m_pNext;
+	while(pFast != NULL && pSlow != NULL)
+	{
+		if(pFast == pSlow)
+			return pFast;
+
+		pSlow = pSlow->m_pNext;
+
+		pFast = pFast->m_pNext;
+		if(pFast != NULL)
+			pFast = pFast->m_pNext;
+	}
+	return NULL;
+}
+
+如果链表中不存在环，那么函数MeetingNode返回NULL
+
+在找到环中任意一个结点之后，就能得出环中的结点数目，并找到环的入口结点
+ListNode* EntryNodeOfLoop(ListNode* pHead)
+{
+	ListNode* meetingNode = MeetingNode(pHead);
+	if(meetingNode == NULL)
+		return NULL;
+
+	//get the number of nodes in loop
+	int nodeInLoop = 1;
+	ListNode* pNode1 = meetingNode;
+	while(pNode1->m_pNext != meetingNode)
+	{
+		pNode1 = pNode1->m_pNext;
+		++nodeInLoop;
+	}
+
+	//move pNode1
+	pNode1 = pHead;
+	for(int i = 0;i < nodeInLoop;++i)
+		pNode1 = pNode1->m_pNext;
+
+	//move pNode1 and pNode2
+	ListNode* pNode2 = pHead;
+	while(pNode1 != pNode2)
+	{
+		pNode1 = pNode1->m_pNext;
+		pNode2 = pNode2->m_pNext;
+	}
+	return pNode1;
+}

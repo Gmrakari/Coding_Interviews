@@ -1,0 +1,131 @@
+
+/*
+ * Date:2021-01-29 09：50
+ * Author:Gmrakari
+ * Project:面试题025：二叉树中和为某一值的路径
+ * 
+ */
+#题意
+题目描述
+
+输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径
+
+struct BinaryTreeNode{
+	int				m_nValue;
+	BinaryTreeNode* m_pLeft;
+	BinaryTreeNode* m_pRight;
+};
+
+
+
+struct BiTNode
+{
+	int data;
+	struct BiTNode *lchild,*rchild;
+};
+
+typedef struct BiTNode BiTNode;
+typedef struct BiTNode *BiTree;
+
+中序遍历的几种情况
+
+分析1：什么时候访问根、什么时候访问左子树、什么时候访问右子树
+
+	当左子树为空或者左子树已经访问完毕以后，再访问根
+	访问完毕根以后，再访问右子树
+
+分析2：为什么是栈，而不是其他队列
+
+先走到的后访问，后走到的先访问
+
+分析3：结点所有路径的情况
+	步骤1：
+		如果结点有左子树，该结点入栈
+		如果结点没有左子树，访问该结点
+
+	步骤2：
+		如果结点没有右子树（结点访问完毕），回退，让栈顶元素出栈，访问栈顶元素，并访问右子树，重复步骤1
+		如果栈为空，表示遍历结束
+
+	注意：入栈的结点表示，本身没有被访问过，同时右子树也没有被访问过
+
+分析4：有一个一直往左走入栈的操作
+
+//一直往左走，走到中序遍历的起点
+
+BiTNode *goLeft(BiTNode *T,stack<BiTNode *> &s){
+	if(T == NULL){
+		return ;
+	}
+	while(T->lchild != NULL){
+		s.push(T);
+		T = T->lchild;
+	}
+	return T;
+}
+
+void InOrder(BiTNode *T){
+	stack<BiTNode *> s;
+	BiTNode *t = goLeft(T,s);
+
+	while(t){
+		printf("%d ",t->data);
+
+		if(t->rchild != NULL){
+			t = goLeft(t->rchild,s);
+		}else if(!s.empty()){
+			t = s.top();
+			s.pop();
+		}else{
+			t = NULL;
+		}
+	}
+}
+
+int main(){
+	BiTNode t1,t2,t3,t4,t5;
+	memset(&t1,0,sizoef(BiTNode));
+}
+
+
+void FindPath(BinaryTreeNode* pRoot,int expectedSum){
+	if(pRoot == NULL)
+		return ;
+
+	std::vector<int> path;
+	int currentSum = 0;
+	FindPath(pRoot,expectedSum,path,currentSum);
+}
+
+void FindPath{
+	BinaryTreeNode* pRoot,
+	int 			expectedSum,
+	std::vector<int>& path,
+	int 			currentSum
+}
+{
+	currentSum += pRoot->m_nValue;
+	path.push_back(pRoot->m_nValue);
+
+	//如果是叶子结点，并且路径上结点的和等于输入的值
+	//打印出这条路径
+	bool isLeaf = pRoot->m_pLeft == NULL && pRoot->m_pRight == NULL;
+	if(currentSum == expectedSum && isLeaf){
+		printf("A path is found");
+		std::vecor<int>::iterator iter = path.begin();
+		for(; iter != path.end();++iter){
+			printf("%d\n".*iter);
+		}
+		printf("\n");
+	}
+
+	//如果不是叶结点，则遍历它的子结点
+	if(pRoot->m_pLeft != NULL)
+		FindPath(pRoot->m_pLeft,expectedSum,path,currentSum);
+	if(pRoot->m_pRight != NULL)
+		FindPath(pRoot->m_pRight,expectedSum,path,currentSum);
+
+	//在返回到父结点之前，在路径上删除当前结点
+	path.pop_back();
+	
+}

@@ -1,0 +1,62 @@
+
+
+/*
+ * Date:2021-03-08 12:02
+ * Author:Gmrakari
+ * Project:面试题048_不能被继承的类
+ * 
+ */
+
+#2 题意
+题目描述
+
+设计一个不能被继承的类
+
+Java中有final表示一个类型不能被继承
+
+C#中也有定义sealed修饰的类不能被继承
+
+
+常规的解法：把构造函数设为私有函数
+
+class SealedClass1
+{
+public:
+	static SealedClass1* GetInstance()
+	{
+		return new SealedClass1();
+	}
+
+	static void DeleteInstance( SealedCLass1* pInstance)
+	{
+		delete pInstance;
+	}
+
+private:
+	SealedClass1() { }
+	~SealedClass1() { }
+};
+
+新奇的解法：利用虚拟继承
+
+template <typename T> class MakeSealed
+{
+	friend T;
+
+private:
+	MakeSealed() { }
+	~MakeSealed() { }
+};
+
+class SealedClass2 : virtual public MakeSealed<SealedClass2>
+{
+public:
+	SealedClass2() { }
+	~SealedClass2() { }
+};
+
+这个SealedClass2使用起来和一般的类型没有区别，我们可以在栈上、也可以在堆上创建实例
+
+尽管类MakeSealed<SealedClass2>的构造函数和析构函数都是私有的，但由于类SealedClass2是它的友元类型，
+因此在SealedClass2中调用MakeSealed<SealedClass2>的构造函数和析构函数都不会引起编译错误
+

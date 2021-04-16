@@ -1,0 +1,8 @@
+
+sizeof(array[0][0])为一个元素占用的空间，
+sizeof(array[0])为一行元素占用的空间，
+sizeof(array)为整个数组占用的空间，
+
+行数 = sizeof(array)/sizeof(array[0]);
+列数 = sizeof(array[0])/sizeof(array[0][0])
+
