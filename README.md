@@ -1,2 +1,2 @@
 # Coding_Interviews
-主要刷剑指Offer、TopCode、Leetcode
+记录主要刷剑指Offer、TopCode、Leetcode的过程
