@@ -30,6 +30,14 @@
 
 */
 
+/*
+ * 解题思路
+ * 设一个人的物理值为A，魔法值为B
+ * 派去一连可得A的贡献，二连可得(A + B) / 2，三连可得B。
+ * 去一连与去二连相比差了A - (A + B) / 2 = (A - B) / 2,同理去二连比去三连也差了(A - B) / 2
+ * 这样，可以根据每个人得A - B数值进行排序，较大者去一连，较小者去三连，中间的去二连.
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 100010;
@@ -54,9 +62,12 @@ int main()
 	long long ans = 0;
 	for(int i = 1; i <= n;++i)
 	{
-		if(i <= k) ans += a[id[i]] * 2;
-		else if(i <= k * 2) ans += a[id[i]] + b[id[i]];
-		else ans += b[id[i]] * 2;
+		if(i <= k)
+			ans += a[id[i]] * 2;
+		else if(i <= k * 2)
+			ans += a[id[i]] + b[id[i]];
+		else
+			 ans += b[id[i]] * 2;
 	}
 
 	printf("%.2f\n",ans / 2.0);
