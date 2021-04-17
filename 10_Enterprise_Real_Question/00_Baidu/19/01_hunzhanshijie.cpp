@@ -72,14 +72,4 @@ int main()
 
 	printf("%.2f\n",ans / 2.0);
 	return 0;
-
-
-
-
-
-
-
-
-
-
 }
