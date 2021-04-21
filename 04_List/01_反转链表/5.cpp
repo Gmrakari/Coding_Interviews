@@ -27,7 +27,15 @@ ListNode* ReverseList(ListNode* pHead)
 
 ListNode* ReverseList_2(ListNode* pHead)
 {
+	if(pHead == nullptr)
+		return nullptr;
+	pHead = pHead->m_pNext;
 
+	ListNode *newhead;
+
+	for(newhead = nullptr;pHead;swap(pHead,newhead))
+		swap(newhead,pHead->m_pNext);
+	return newhead;
 }
 
 
@@ -53,31 +61,29 @@ int main(int argc,const char* argv[])
 	node[5].m_pNext = NULL;
 
 	ListNode* ReverseList(ListNode* pHead);
-	//ListNode* ReverseList_2(ListNode* pHead);
+	ListNode* ReverseList_2(ListNode* pHead);
 
 
 	ListNode *res1,*res2;
 	res1 = ReverseList(node);
-//	res2 = ReverseList_2(node);
 
 
-	while(res1 != NULL)
+	while(res1)
 	{
 		cout << res1->m_nKey << " ";
 		res1 = res1->m_pNext;
 	}
 	cout << endl;
-/*
 
+	res2 = ReverseList(node);
 
-	while(res2 != NULL)
+	while(res2 != nullptr)
 	{
 		cout << res2->m_nKey << " ";
 		res2 = res2->m_pNext;
 	}
 	cout << endl;
 
-*/	
 	return 0;
 }
 
