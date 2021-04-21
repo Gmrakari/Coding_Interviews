@@ -1,0 +1,140 @@
+
+
+面试题2:实现Singleton模式
+
+/*
+* 题目：设计一个类，我们只能生成该类的一个实例
+*
+*
+ */
+
+// 不好的解法一:只适用于单线程环境
+
+要求只能生成一个实例，因为我们必须把构造函数设为私有函数以禁止他人创建实例。
+我们可以定义一个静态实例，在需要的时候创建该实例
+
+public sealed class Singleton1{
+	private Singleton1(){
+	}
+
+	private static Singleton1 instance = null;
+
+	public static Singleton1 Instance{
+		get{
+			if(instace == null){
+			instance = new Singleton1();
+
+			return instance;
+			}
+		}
+	}
+}
+
+// 不好的解法二:虽然在多线程环境中能工作但效率不高
+
+为了保证在多线程环境下我们还是只能得到类型的一个实例，需要加上一个同步锁。
+
+public sealed class Singleton2{
+	private Singleton2(){
+	}
+
+	private static readonly object syncObj = new object();
+
+	private static Singleton2 instance = null;
+
+	public static Singleton2 Instance{
+		get{
+			lock(syncObj)
+			{
+				if(instace == null){
+				instance = new Singleton2();
+			}
+			return instance;
+			}
+		}
+	}
+}
+
+由于一个时刻只有一个线程能得到同步锁，当第一个线程加上锁时，第二个线程只能等待。
+当第一个线程发现实例还没有创建时，它创建出一个实例。接着第一个线程释放同步锁，此时第二个线程可以加上同步锁，并运行接下来的代码
+缺点：每次通过属性Instance 得到的Singleton2的实例，都会试图加上一个同步锁，而加锁时一个非常耗时的操作，在没有必要的时候我们应该尽量避免
+
+可行的解法:加同步锁前后两次判断实例是否已存在
+
+我们只是在实例还没有创建之前需要加锁操作，以保证只有一个线程创建出实例。而当实例已经创建之后，我们已经不需要再做加锁操作
+
+public sealed class Singleton3{
+	private Singleton3(){
+	}
+
+	private static object syncObj = new object();
+
+	private static Singleton3 instance = null;	
+
+	public static Singleton3 Instance{
+		get{
+			if(instace == null){
+				lock(syncObj)
+				{
+					if(install == null)
+					instance = new Singleton3();
+				}
+			}
+			return instance;
+		}
+	}
+}
+
+当instance为null即没有创建时，需要加锁。
+当instance已经创建出来之后，即无需加锁。
+因为只有在第一次的时候instance为null，因此只在第一次试图创建实例的时候需要加锁。
+
+推荐解法一：利用静态构造函数
+
+public sealed class Singleton4
+{
+	private Singleton4()
+	{	
+	}
+
+	private static Singleton4 instance = new Singleton4();
+	public static Singleton4 Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
+}
+
+推荐解法二：实现按需创建实例
+
+解决Singleton4中的实例创建时机过早的问题
+
+public sealed class Singleton5
+{
+	Singleton5()
+	{
+	}
+
+	public static Singleton5 Instance
+	{
+		get
+		{
+			return Nested.instance;
+		}
+	}
+	class Nested
+	{
+		static Nested()
+		{
+		}
+
+		internal static readonly Singleton5 instance = new Singleton5();
+	}
+}
+
+在内部定义了一个私有类型Nested。当第一次用到这个嵌套类型的时候，会调用静态构造函数创建Singleton5的实例instance。
+类型Nested只在属性Singleton5.Instance中被用到，由于其私有属性他人无法使用Nested类型。因此当我们第一次试图通过属性Singleton5.Instance得到Single5的实例时，会自动调用Nested的静态构造函数创建实例instance。
+
+如果我们不调用属性Singleton5.Instance，那么就不会出发.NET运行时调用Nested，也不会创建实例，这样就真正做到了按需创建。

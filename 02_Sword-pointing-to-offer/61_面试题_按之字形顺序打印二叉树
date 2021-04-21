@@ -1,0 +1,66 @@
+
+
+/*
+ * Date:2021-04-01 09:02
+ * Author:Gmrakari
+ * Project:面试题061_按之字形顺序打印二叉树
+ * 
+ */
+
+#题意
+题目描述
+
+请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+
+关于层次遍历，这个我们在我之前的几篇博客里面都讲的很清楚了
+
+二叉树的遍历详解（前序中序后序层次-递归和非递归）
+
+剑指Offer--023-从上往下打印二叉树（层次遍历二叉树）
+
+剑指Offer--060-把二叉树打印成多行
+
+
+void Print(BinaryTreeNode* pRoot)
+{
+    if(pRoot == NULL)
+      return ;
+    
+    std::stack<BinaryTreeNode *> levels[2];            
+    int current = 0;
+    int next = 1;
+
+    levels[current].push(pRoot);
+    while(!levels[0].empty() || !levels[1].empty())
+    {
+        BinaryTreeNode* pNode = levels[current].top();
+        levels[current].pop();
+
+        printf("%d",pNode->m_nValue);
+
+        if(current == 0)
+        {
+            if(pNode->m_pLeft != NULL)
+                levels[next].push(pNode->m_pLeft);
+            if(pNode->m_pRight != NULL)
+                levels[next].push(pNode->m_pRight);
+        }
+        else
+        {
+            if(pNode->m_pRight != NULL)
+                levels[next].push(pNode->m_pRight);
+            if(pNode->m_pLeft != NULL)
+                levels[next].push(pNode->m_pLeft);
+        }
+
+        if(levels[current].empty())
+        {
+            printf("\n");
+            current = 1 - current;
+            next = 1 - next;
+        }
+    }
+}
+
+//上述代码定义了两个栈levels[0]和levels[1]。当打印一个栈理的结点时，它的子结点保存到另一个栈里，
+//当一层所有节点都打印完了时，交换这两个栈并继续打印下一层
