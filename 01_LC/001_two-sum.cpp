@@ -55,6 +55,28 @@ public:
                     }
     		}
     	}
-        return {i,j};
+        return {};
     }
+};
+
+/*
+ * Hashtable
+ */
+
+class Solution2
+{
+public:
+	vector<int> twoSum2(vector<int>& nums,int target)
+	{
+		unordered_map<int,int> hashtable;
+		for(int i = 0;i < nums.size();++i)
+		{
+			auto it = hashtable.find(target - nums[i]);
+			if(it != hashtable.end())
+			{
+				return (it->second,i);
+			}
+		}
+		return {};
+	}
 };
