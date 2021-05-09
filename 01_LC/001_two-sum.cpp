@@ -40,6 +40,14 @@
  * Date:2021-04-14 09:13
  */
 
+/*
+ * 
+ * 第一种思路，创建一个vecotr,两层循环，
+ * 找到i,j满足nums[i] + nums[j] == target
+ * 如果存在，那么返回{i,j}
+ * 否则,返回{};
+ *
+ */
 
 class Solution {
 public:
@@ -60,7 +68,12 @@ public:
 };
 
 /*
- * Hashtable
+ * 第二种思路:Hashtable
+ * 创建一个unordered_map<int,int>,
+ * 在map中查找,如果target - nums[i] 在map中存在
+ * 返回it-second,i;
+ * 否则返回 {};
+ *
  */
 
 class Solution2
