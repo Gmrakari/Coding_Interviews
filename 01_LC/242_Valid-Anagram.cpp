@@ -26,6 +26,13 @@
 
 */
 
+/*
+ * 方法一:
+ * 判断两个字符串是否相等，如果不相等，直接返回false;
+ * 对两个字符串进行排序
+ * 然后判断他们是否相等，如果相等 返回true;否则返回false;
+ */
+
 class Solution {
 public:
     bool isAnagram(string s, string t) {
@@ -68,3 +75,31 @@ public:
 	}
 };
 
+/*
+ * unordered_map
+ */
+
+class Solution3
+{
+public:
+	bool isAnagram(string s,string t)
+	{
+		unordered_map<int,int> m1,m2;
+		for(char c : s)
+		{
+			m1[c - 'a']++;
+		}
+		for(char c : t)
+		{
+			m2[c - 'a']++;
+		}
+		for(int i = 0; i < 26;i++)
+		{
+			if(m1[i] != m2[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+};
