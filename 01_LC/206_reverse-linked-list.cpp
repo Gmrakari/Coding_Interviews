@@ -19,6 +19,8 @@ public:
             return nullptr;
         ListNode *prev = nullptr;			//前指针结点
         ListNode *cur = head;				//当前指针结点
+        
+        //创建一个临时变量让临时变量 当作一个交换点
 
       	//每次循环，都将当前结点指向它前面的结点，然后当前结点和前结点后移
         while(cur != nullptr)
