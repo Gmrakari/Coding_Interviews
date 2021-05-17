@@ -12,84 +12,78 @@ using namespace std;
  * 
  */
 
-typedef struct BiTNode
+struct BiTNode
 {
-	int data;
+	int val;
 	BiTNode *lchild;
 	BiTNode *rchild;
-}BiTNode,*BiTree;
 
-//步骤1
-//如果结点有左子树 该结点入栈
-//如果结点没有左子树 访问该结点
+	BiTNode():val(0),lchild(nullptr),rchild(nullptr){}
+	BiTNode(int x):val(x),lchild(nullptr),rchild(nullptr) {}
+	BiTNode(int x,BiTNode *lchild,BiTNode *rchild):val(x),lchild(lchild),rchild(rchild) {}
+};
 
-//步骤2
-//如果结点有右子树(结点访问完毕) 根据栈顶指示回退，访问栈顶元素，并访问右子树，重复步骤1
-//如果栈空，表示遍历结束
-
-BiTNode* goLeft(BiTNode *root,stack<BiTNode *> &s)
+class BiTree
 {
-	if(root == NULL)
+public:
+	BiTNode* init()
 	{
-		return NULL;
-	}
-	
-	while(root->lchild != NULL)
-	{
-		s.push(root);
-		root = root->lchild;
-	}
-	return root;
-	
-}
+		BiTNode *node1 = new BiTNode(4);
+		BiTNode *node2 = new BiTNode(5);
+		BiTNode *node3 = new BiTNode(6);
+		BiTNode *node4 = new BiTNode(2,node1,node2);
+		BiTNode *node5 = new BiTNode(3,node3,nullptr);
+		BiTNode *node6 = new BiTNode(1,node4,node5);
+		BiTNode *pRoot = node6;
 
-void InOrder(BiTNode *root)
+		return pRoot;
+	}
+	void Destroy(BiTNode *)
+	{
+		BiTNode* pRoot = init();
+		if(pRoot == nullptr)
+			return ;
+		BiTNode* lchild = pRoot->lchild;
+		BiTNode* rchild = pRoot->rchild;
+
+		delete pRoot;
+		pRoot = nullptr;
+
+		Destroy(lchild);
+		Destroy(rchild);
+	}
+	void Without_Recursive_traversal()
+	{
+		BiTNode* pRoot = init();
+		if(pRoot == nullptr)
+			return ;
+		stack<BiTNode *> m_stack;
+		BiTNode* node = pRoot;
+		while(!m_stack.empty() || node)
+		{
+			while(node)
+			{
+				m_stack.push(node);
+				node = node->lchild;
+			}
+			if(!m_stack.empty())
+			{
+				node = m_stack.top();
+				cout << node->val << " ";
+				m_stack.pop();
+				node = node->rchild;
+			}
+		}
+		cout << endl;
+	}
+};
+
+
+int main()
 {
-	stack<BiTNode *> s;
-	BiTNode *t = goLeft(root,s);
-
-	while(t)
-	{
-		cout << t->data <<" ";
-		if(t->rchild != NULL)
-		{
-			t = goLeft(t->rchild,s);
-		}
-		else if(!s.empty())
-		{
-			t = s.top();
-			s.pop();
-		}
-		else
-		{
-			t = NULL;
-		}
-	}
-}
-
-int main(){
-
-	BiTNode t1,t2,t3,t4,t5;
-	memset(&t1,0,sizeof(BiTNode));
-	memset(&t2,0,sizeof(BiTNode));
-	memset(&t3,0,sizeof(BiTNode));
-	memset(&t4,0,sizeof(BiTNode));
-	memset(&t5,0,sizeof(BiTNode));
-	
-	t1.data = 1;
-	t2.data = 2;
-	t3.data = 3;
-	t4.data = 4;
-	t5.data = 5;
-
-	t1.lchild = &t2;
-	t1.rchild = &t3;
-
-	t2.lchild = &t4;
-	t2.rchild = &t5;
-		
-	InOrder(&t1);
-
-	printf("\n");
-	
+	BiTree m_tree;
+	cout << "inoder:";
+	m_tree.Without_Recursive_traversal();
+	//m_tree.Destroy();
+	return 0;
 }
