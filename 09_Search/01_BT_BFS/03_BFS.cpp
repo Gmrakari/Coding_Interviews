@@ -82,11 +82,13 @@ public:
 	{
 		if(pRoot == nullptr)
 			return ;
+		TreeNode *lchild = pRoot->lchild;
+		TreeNode *rchild = pRoot->rchild;
 
 		delete pRoot;
 		pRoot = nullptr;
-		Destroy_Tree(pRoot->lchild);
-		Destroy_Tree(pRoot->rchild);
+		Destroy_Tree(lchild);
+		Destroy_Tree(rchild);
 	}
 
 };
