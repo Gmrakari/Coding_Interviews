@@ -6,27 +6,37 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-double N = 0.0000000001;
+const double N = 0.0000000001;
+
+double Solution_1(double &left,double &right)
+{
+	double mid;
+	while(right > left)
+	{
+		mid = (left + right) / 2;
+		double tmp = mid * mid  - 2;
+		if(abs(tmp) <= N)
+		{
+			return mid;
+		}
+		else if(tmp < 0)
+		{
+			left = mid;
+		}
+		else
+		{
+			right = mid;
+		}
+	}
+	return mid;
+}
+
 
 int main()
 {
 	double left = 1.4;
 	double right = 1.5;
-
-	double mid = (left + right) / 2;
-
-	while(right - left > N)
-	{
-		if(mid * mid > 2)
-		{
-			right = mid;
-		}
-		else
-		{
-			left = mid;
-		}
-		mid = (left + right) / 2;
-	}
-	cout << mid << endl;
+	double ret = Solution_1(left,right);
+	cout << ret << endl;
 	return 0;
 }
