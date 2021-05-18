@@ -189,7 +189,7 @@ void Stack_BFS(TreeNode *pRoot)
 	cout << endl;
 }
 
-void DFS_Recursive(TreeNode *pRoot)
+void BFS_Recursive(TreeNode *pRoot)
 {
 	if(pRoot == nullptr)
 	{
@@ -197,9 +197,9 @@ void DFS_Recursive(TreeNode *pRoot)
 	}
 	cout << pRoot->val << " ";
 	if(pRoot->lchild != nullptr)
-		DFS_Recursive(pRoot->lchild);
+		BFS_Recursive(pRoot->lchild);
 	if(pRoot->rchild != nullptr)
-		DFS_Recursive(pRoot->rchild);
+		BFS_Recursive(pRoot->rchild);
 
 }
 
@@ -253,8 +253,8 @@ int main()
 	cout << "BFS: " ;
 	BFS(pRoot);
 	
-	cout << "DFS_Recursive:";
-	DFS_Recursive(pRoot);
+	cout << "BFS_Recursive:";
+	BFS_Recursive(pRoot);
 	cout << endl;
 
 	cout << "PrintTree:";
