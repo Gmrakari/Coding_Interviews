@@ -35,7 +35,7 @@ void DestroyTree(TreeNode *pRoot)
 	DestroyTree(rchild);
 }
 
-//queue dfs
+//queue bfs
 void BFS(TreeNode *pRoot)
 {
 	if(pRoot == nullptr)
