@@ -26,7 +26,7 @@ int InversePairs( int* data,int length)
 	for(int i = 0; i < length;++i)
 		copy[i] = data[i];
 
-	int count = InversePairsCore(data,copy,0,lenth - 1);
+	int count = InversePairsCore(data,copy,0,length - 1);
 	delete[] copy;
 
 	return count;
