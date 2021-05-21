@@ -59,8 +59,11 @@
  */
 
 #include <bits/stdc++.h>
+#include <vector>
+#include <algorithm>
 #include <iostream>
 #include <stdio.h>
+#include <cstdio>
 using namespace std;
 typedef long long LL;
 const int inf = 0x3f3f3f3f;
@@ -76,7 +79,7 @@ void dfs(int l, int r, int deep) {
 	for (int i = l; i <= mid; i++) {
 		int temp = lower_bound(a + mid + 1, a + r + 1, a[i]) - ( a + mid + 1 );
 		sum[deep][0] += (LL)temp;
-		temp = r - mid - (upper_bound)(a + mid + 1, a + r + 1, a[i]) - (a + mid + 1);
+		temp = r - mid - (upper_bound(a + mid + 1, a + r + 1, a[i]) - (a + mid + 1));
 		sum[deep][1] += (LL)temp;
 	}
 	sort(a + l, a + r + 1);
@@ -97,10 +100,9 @@ int main() {
 			}
 			LL ans = 0;
 			for (int i = 1; i <= n; i++) ans += sum[i][0];
-			printf("%ld\n",ans);
+			printf("%lld\n",ans);
 		}
 		return 0;
-	}
 }
 
 
