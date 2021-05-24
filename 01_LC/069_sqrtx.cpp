@@ -114,3 +114,23 @@ public:
 		return ((long long)(ans + 1) * (ans + 1) <= x ? ans + 1 : ans);
 	}
 };
+
+/*
+ * Crazepony
+ * 飞控代码
+ * copy by:www.crazepony.com/book/bolg/2015-08-27-carmark-sqrt.html
+ */
+static float invSqrt(float number) {
+	volatile long i;
+	volatile float x, y;
+	volatile const float f = 1.5F;
+
+	x = number * 0.5F;
+	y = number;
+
+	i = *((long *)&y);
+	i = 0x5f375a86 - (i >> 1);
+	y = *((float *) &i);
+	y = y * ( f - ( x * y * y ) );
+	return y;
+}
