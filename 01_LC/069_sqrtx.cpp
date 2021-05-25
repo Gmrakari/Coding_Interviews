@@ -116,7 +116,8 @@ public:
 };
 
 /*
- * Crazepony
+ * Author:Crazepony
+ * update Date: 2021-05-25
  * 飞控代码
  * copy by:www.crazepony.com/book/bolg/2015-08-27-carmark-sqrt.html
  */
