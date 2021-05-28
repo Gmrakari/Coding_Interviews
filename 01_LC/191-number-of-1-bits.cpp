@@ -25,3 +25,20 @@ public:
         return cnt;
     }
 };
+
+/*
+ * 除2 取余数
+ * 
+ */
+
+class Solution_2 {
+public:
+    int hammingWeight(uint32_t n) {
+        int ret = 0;
+        while (n) {
+            ret = ret + n % 2;
+            n = n >> 1;
+        }
+        return ret;
+    }
+};
