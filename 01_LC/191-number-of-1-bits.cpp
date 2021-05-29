@@ -12,6 +12,13 @@
  *
  */
 
+/*
+ *
+ * 21春招 37互娱研发笔试算法题 第二题
+ * 没有做出来 其实剑指offer里面就有 但是没有印象 现在有了
+ *
+ */
+
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
