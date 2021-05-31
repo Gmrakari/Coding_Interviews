@@ -58,3 +58,35 @@ public:
 			return solutions;
     }
 };
+
+/*
+ * Date:2021-05-31 19:53
+ * Solution_2 bits
+ *
+ */
+
+class Solution_2 {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+			if (n < 1) return {};
+			count = 0;
+			DFS(n,0,0,0,0);
+			return n;
+    }
+		int DFS(int n, int row, int cols, int pie, int na) {
+			if (row >= n) {
+				count++;
+				return count;
+			}
+			int bits = (~(cols | pie | na)) & ((1 << n) - 1);//获取当前所有的空位
+
+			while(bits > 0) {
+				int p = bits & (-bits);//取到最低位的1
+				DFS(n, row + 1, cols | p, (pie | p) << 1, (na | p) >> 1);
+				bits = bits & (bits - 1);	//去掉最低位的1
+			}
+		}
+
+private:
+    int count = 0;
+};
