@@ -15,7 +15,10 @@ struct ListNode {
 	ListNode(int x,ListNode *next) : val(x),next(next) {} 
 };
 
+//LC 203
 ListNode* removeElements(ListNode* head, int val);
+
+//LC 206
 ListNode* reverse(ListNode* head);
 
 #endif
