@@ -1,0 +1,44 @@
+#预处理：处理#include、#define、#ifdef 等宏命令
+#编译：把预处理完的文件编译为汇编程序.s
+#汇编：把汇编程序.s编译为.o二进制文件
+#链接：把多个二进制文件.o集合（链接）成一个可执行文件
+
+# $^： 规则中所有的依赖
+# $< : 规则中的第一个依赖
+# $@：规则中的目标
+
+# 模式自动匹配 %
+
+#目标文件名字
+TARGET = app
+
+#编译器，默认是gcc
+CC = g++
+
+#编译参数
+CFLAG = -Wall
+
+#编译包含的头文件所在目录
+INCLUDES = -I. -Iinclude/
+
+#所有用到的源文件
+SRCS = linklist.cpp main.cpp
+
+#把源文件SRCS字符串的后最.cpp改为.o
+OBJS = $(SRCS:.cpp = .o)
+
+#匹配所有的伪目标依赖，即执行目标linklist.cpp main.cpp
+.PHONY:all #all 为伪目标all:$(OBJS)
+	#当所有依赖目标都存在之后，链接,linklist.o & main.cpp
+	$(CC) $(LDFLAG) -o $(TARGET) $^
+
+#重定义隐藏规则，匹配上述目标linklist.o & main.cpp
+%.o : %.cpp
+	#生成.o文件 注意，由于SRCS有个别包含详细地址的，生成的.o文件也是详细地址
+	$(CC) -c $(INCLUDES) $(CFLAG) $(CPPFLAG) $< -o $@
+
+#清空除源文件外的所有生成文件 
+.PHONY:clean
+clean:
+	rm $(basename $(TARGET)) $(SRCS:.cpp=.o) -f
+
