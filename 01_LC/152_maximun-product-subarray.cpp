@@ -33,6 +33,6 @@ public:
 
 int main() {
 	Solution su;
-	vector<int> vec = {-2,1,-3};
+	vector<int> vec = {-2,1,3,4};
 	cout <<su.maxProduct(vec) << endl;
 }
