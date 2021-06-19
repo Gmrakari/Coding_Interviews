@@ -20,6 +20,9 @@ public:
         dp[0][1] = nums[0];
         int res = nums[0];
         for (int i = 1; i < (int)nums.size(); i++) {
+						// x == 0 或者 x == 1
+						// y == 0 或者 y == 1
+						// 因为我们可以复用前一次的结果 不用申请使用那么多空间
             int x = i % 2;
             int y = (i - 1) % 2;
             dp[x][0] = max(max(dp[y][0] * nums[i], dp[y][1] * nums[i]),nums[i]);
