@@ -35,11 +35,23 @@ class Solution_2 {
 public:
 	int maxProduct(vector<int>& nums) {
 		vector<int> maxF(nums), minF(nums);
-		for (int i = 1; i <(int)nums.size(); ++i) {
+		for (int i = 1; i < (int)nums.size(); ++i) {
 			maxF[i] = max(maxF[i - 1] * nums[i], max(nums[i], minF[i - 1] * nums[i]));
 			minF[i] = min(minF[i - 1] * nums[i], min(nums[i], maxF[i - 1] * nums[i]));
 		}
 		return *max_element(maxF.begin(), maxF.end());
+	}
+	//优化
+	int maxProduct_2(vector<int>& nums) {
+		int maxF = nums[0],minF = nums[0],ans = nums[0];
+		for (int i = 1; i < (int)nums.size();++i) {
+			int mx = maxF,mn = minF;
+			maxF = max(mx * nums[i], max(nums[i], mn * nums[i]));
+			minF = min(mx * nums[i], min(nums[i], mx * nums[i]));
+
+			ans = max(maxF, minF);
+		}
+		return ans;
 	}
 };
 
@@ -52,5 +64,7 @@ int main() {
 	cout << "Solution_2:";
 	Solution_2 so;
 	cout << so.maxProduct(vec) << endl;
+	cout << "Solution_2_2:";
+	cout << so.maxProduct_2(vec) << endl;
 	return 0;
 }
