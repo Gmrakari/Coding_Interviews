@@ -1,6 +1,5 @@
-
-src = 152_maximun-product-subarray.cpp
-obj = 152_maximun-product-subarray.o
+src = 912_sort-an-array.cpp
+obj = 912_sort-an-array.o
 
 CC = g++
 
