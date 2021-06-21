@@ -1,5 +1,5 @@
-src = 912_sort-an-array.cpp
-obj = 912_sort-an-array.o
+src = 122_best-time-to-buy-and-sell-stock-ii.cpp
+obj = 122_best-time-to-buy-and-sell-stock-ii.o
 
 CC = g++
 
