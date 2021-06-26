@@ -1,8 +1,7 @@
+#pragma once
+#ifndef __M_LINKLIST_H_
+#define __M_LINKLIST_H_
 
-#ifndef __LINKLIST_H_
-#define __LINKLIST_H_
-
-#include <iostream>
 #include <bits/stdc++.h>
 
 struct ListNode {

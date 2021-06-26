@@ -1,4 +1,5 @@
-#include "./include/linklist.h"
+
+#include "include/linklist.h"
 
 ListNode* init() {
 	ListNode *node5 = new ListNode(5,NULL);

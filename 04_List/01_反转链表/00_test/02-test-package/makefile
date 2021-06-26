@@ -10,7 +10,7 @@
 # 模式自动匹配 %
 
 #目标文件名字
-target = app
+target = test
 
 #编译器，默认是gcc
 CC = g++
@@ -30,7 +30,7 @@ obj = $(patsubst ./%.cpp, ./%.o, $(src))
 $(target) : $(obj)
 	$(CC) $^ -o $@
 
-#重定义隐藏规则，匹配上述目标linklist.o & main.cpp
+#重定义隐藏规则，匹配上述目标linklist.o & test-main.cpp
 %.o : %.cpp
 	$(CC) -c $(include) $(CFLAG) $< -o $@
 
