@@ -14,14 +14,14 @@ ListNode* init() {
 
 ListNode* reverse(ListNode* head) {
 	if (head == nullptr) return nullptr;
-	ListNode* pre = head;
-	ListNode* cur = nullptr;
+	ListNode* cur = head;
+	ListNode *pre = nullptr;
 
 	while (cur) {
-		ListNode *node = pre->next;
-		pre->next = cur;
-		cur = pre;
-		pre = node;
+		ListNode *node = cur->next;
+		cur->next = pre;
+		pre = cur;
+		cur = node;
 	}
-	return cur;
+	return pre;
 } 
