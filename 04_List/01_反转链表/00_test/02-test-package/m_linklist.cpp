@@ -7,21 +7,21 @@ ListNode* init() {
 	ListNode *node3 = new ListNode(3,node4);
 	ListNode *node2 = new ListNode(2,node3);
 	ListNode *node1 = new ListNode(1,node2);
-	ListNode *head = node1;
+	ListNode *head = new ListNode();
+	head->next = node1;
 	
 	return head;
 }
 
-ListNode* reverse(ListNode* head) {
-	if (head == nullptr) return nullptr;
-	ListNode* cur = head;
-	ListNode *pre = nullptr;
-
-	while (cur) {
-		ListNode *node = cur->next;
-		cur->next = pre;
-		pre = cur;
-		cur = node;
+ListNode *reverse(ListNode *L) {
+	if (L == nullptr) return nullptr;
+	ListNode *p = L->next;
+	L->next = nullptr;
+	while (p) {
+		ListNode *cur = p;
+		p = p->next;
+		cur->next = L->next;
+		L->next = cur;
 	}
-	return pre;
-} 
+	return L->next; 
+}
