@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	}
 	cout << endl;
 	
-	/*
+	
 	head = init();
 	head = reverse(head);
 	cout << "reverse:";
@@ -28,8 +28,7 @@ int main(int argc, char** argv) {
 		head = head->next;
 	}
 	cout << endl;
-		
-	*/
+	
 	head = init();
 	cout << "original:";
 	while(head) {
