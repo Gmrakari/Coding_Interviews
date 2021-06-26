@@ -1,5 +1,6 @@
 #include "./include/linklist.h"
 #include <stack>
+using namespace std;
 
 ListNode* init() {
 	ListNode *node5 = new ListNode(5,NULL);
@@ -34,7 +35,6 @@ ListNode* removeElements(ListNode* head, int val) {
 }
 
 ListNode* reverse(ListNode* head) {
-	/*
 	if (head == NULL) return NULL;
 	stack<ListNode *> st;
 	
@@ -54,5 +54,4 @@ ListNode* reverse(ListNode* head) {
 	}
 	newnode->next = NULL;
 	return newhead;
-	*/
 } 
