@@ -82,6 +82,45 @@ public:
 		}
 		return dp[len - 1][4];
 	}
+
+	/*
+	 * leetcode 官方题解里的一种优化空间写法
+	 * 思路比较绕 见代码随想录_动态规划专题精讲 P129解释
+	 *
+	 */
+
+	int maxProfit_dp_optimize(vector<int>& prices) {
+		if (prices.size() == 0 ) return 0;
+		vector<int> dp(5, 0);
+		dp[1] = -prices[0];
+		dp[3] = -prices[0];
+		for (int i = 1; i < (int)prices.size(); i++) {
+			dp[1] = max(dp[1], dp[0] - prices[i]);	
+			dp[2] = max(dp[2], dp[1] + prices[i]);	
+			dp[3] = max(dp[3], dp[2] - prices[i]);	
+			dp[4] = max(dp[4], dp[3] + prices[i]);	
+		}
+		return dp[4];
+	}
+
+
+	/*
+	 * 我觉得这个版本比较直观
+	 *
+	 */
+
+	int maxProfit_dp_optimize_2(vector<int>& prices) {
+		int n = prices.size();
+		int buy1 = -prices[0],sell1 = 0;
+		int buy2 = -prices[0],sell2 = 0;
+		for (int i = 1;i < n;i++) {
+			buy1 = max(buy1, -prices[i]);
+			sell1 = max(sell1, buy1 + prices[i]);
+			buy2 = max(buy2, sell1 - prices[i]);
+			sell2 = max(sell2, buy2 + prices[i]);
+		}
+		return sell2;
+	} 
 };
 
 int main() {
@@ -97,5 +136,28 @@ int main() {
 
 	cout << "test3: " << endl;
 	cout << so.maxProfit_dp(test3) << endl;//0
+
+	cout << "optimize:" << endl;
+
+	cout << "test1: " << endl;
+	cout << so.maxProfit_dp_optimize(test1) << endl;//6
+
+	cout << "test2: " << endl;
+	cout << so.maxProfit_dp_optimize(test2) << endl;//4
+
+	cout << "test3: " << endl;
+	cout << so.maxProfit_dp_optimize(test3) << endl;//0
+
+	cout << "optimize_2:" << endl;
+
+	cout << "test1: " << endl;
+	cout << so.maxProfit_dp_optimize_2(test1) << endl;//6
+
+	cout << "test2: " << endl;
+	cout << so.maxProfit_dp_optimize_2(test2) << endl;//4
+
+	cout << "test3: " << endl;
+	cout << so.maxProfit_dp_optimize_2(test3) << endl;//0
+
 	return 0;
 }
