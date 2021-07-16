@@ -1,0 +1,80 @@
+
+
+/*
+ * Date:2021-03-19 10:06
+ * Author:Gmrakari
+ * Project:面试题057_删除链表中重复的结点
+ * 
+ */
+
+struct ListNode
+{
+	int m_nValue;
+	ListNode* m_pNext;
+};
+
+#题意
+题目描述
+
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。
+
+例如，链表1->2->3->3->4->4->5
+
+处理后为 1->2->5
+
+
+
+解决这个问题第一步是确定删除函数的参数
+
+这个函数需要输入待删除链表的头结点
+
+头结点可能与后面的结点重复，也就是说头结点也可能被删除，因此删除函数应该声明为
+void deleteDuplication(ListNode** pHead)
+而不是void deleteDuplication(LIstNode* pHead)
+
+接下来我们从头遍历整个链表，如果当前结点(pNode)的值与下一个结点的值相同，那么他们就是重复的结点，都可以被删除
+为了保证删除之后的链表仍然是相连的而没有中间断开，我们要把当前结点的上一个结点(pPreNode)和后面值比当前结点的值要大的结点相连
+我们要确保pPreNode要始终与下一个没有重复的结点连接在一起
+
+void deleteDuplication(ListNode** pHead)
+{
+	if(pHead == NULL || *pHead == NULL)
+		return ;
+
+
+	ListNode* pPreNode = NULL;
+	ListNode* pNode = *pHead;
+	while(pNode != NULL)
+	{
+		ListNode *pNext = pNode->m_pNext;
+		bool needDelete = false;
+		if(pNext != NULL && pNext->m_nValue == pNode->m_nValue)
+			needDelete = true;
+
+		if(!needDelete)
+		{
+			pPreNode = pNode;
+			pNode = pNode->m_pNext;
+		}
+		else
+		{
+			int value = pNode->m_nValue;
+			ListNode* pToBeDel = pNode;
+			while(pToBeDel != NULL && pToBeDel->m_nValue == value)
+			{
+				pNext = pToBeDel->m_pNext;
+
+				delete pToBeDel;
+				pToBeDel = NULL;
+
+				pToBeDel = pNext;
+			}
+
+			if(pPreNode == NULL)
+				*pHead = pNext;
+			else
+				pPreNode->m_pNext = pNext;
+			pNode = pNext;
+		}
+	}
+}

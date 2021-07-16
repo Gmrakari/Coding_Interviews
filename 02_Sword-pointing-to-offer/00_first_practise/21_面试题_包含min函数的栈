@@ -1,0 +1,63 @@
+
+
+/*
+ * Date:2021-01-10 20：00
+ * Author:Gmrakari
+ * Project:面试题21_包含min函数的栈
+ * 
+ */
+
+
+class Solution {
+public:
+    void push(int value) {
+        
+    }
+    void pop() {
+        
+    }
+    int top() {
+        
+    }
+    int min() {
+        
+    }
+};
+
+// m_data 是数据栈  m_min 是辅助栈
+// 
+
+/*
+	将数据压入数据栈中
+
+	更新辅助栈的信息 
+		如果数据栈的栈顶元素的值 < 辅助栈的栈顶的值 或者 辅助栈为0的时候
+			那么更新 辅助栈的信息 (将数据栈栈顶的元素 压入 辅助栈中)
+		否则 (辅助栈的元素 仍然是较小值)
+			那么将辅助栈栈顶(保存的)最小值 再一次 压入到辅助栈中
+
+
+ */
+
+template <typename T> void StackWithMin<T>::push(const T& value){
+	m_data.push(value);
+
+	if(m_min.size() == 0 || value < m_min.top())
+		m_min.push(value);
+	else
+		m_min.push(m_min.top());
+}
+
+
+template <typename T> void StackWithMin<T>::pop(){
+	assert(m_data.size() > 0 && m_min.size() > 0);
+
+	m_data.pop();
+	m_min.pop();
+}
+
+template <typename T> const T& StackWithMin<T>::min() const{
+	assert(m_data.size() > 0 && m_min.size() > 0)
+	
+	return m_min.top();
+}

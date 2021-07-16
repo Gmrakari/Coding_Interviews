@@ -1,0 +1,85 @@
+
+/*
+ * Date:2021-03-02 09:40
+ * Author:Gmrakari
+ * Project:面试题042_翻转单词顺序 VS 左旋转字符串
+ */
+
+#题意
+题目描述
+
+牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？
+
+样例输入
+
+student. a am I
+
+I'm a Freshman and I like JOBDU!
+
+样例输出
+
+I am a student.
+
+JOBDU! like I and Freshman a I'm
+
+第一步翻转句子中的所有的字符
+
+比如翻转 I am a student. == > .tneduts a ma I  此时不但翻转了句子中的单词的顺序，连单词内的字符顺序也被翻转了
+
+第二步再翻转每个单词中字符的顺序，就得到了"student. a am I"
+
+关键在于实现一个函数以翻转字符串中的一段
+
+void Reverse(char *pBegin,char *pEnd)
+{
+	if(pBegin == NULL || pEnd == NULL)
+		return ;
+
+	while( pBegin < pEnd )
+	{
+		char temp = *pBegin;
+		*pBegin = *pEnd;
+		*pEnd = temp;
+
+		pBegin++,pEnd--;
+	}
+}
+
+用上面的这个函数实现先翻转整个句子，再翻转句子中的每个单词
+
+char* ReverseSentence(char *pData)
+{
+	if(pData == NULL)
+		return NULL;
+
+	char *pBegin = pData;
+
+	char *pEnd = pData;
+	while(*pEnd != '\0')
+		pEnd++;
+	pEnd--;
+
+	//翻转整个句子
+	Reverse(pBegin,pEnd);
+
+	//翻转句子中的每个单词
+	pBegin = pEnd = pData;
+	while( *pBegin != '\0')
+	{
+		if( *pBegin == ' ')
+		{
+			pBegin++;
+			pEnd++;
+		}
+		else if( *pEnd == ' ' || *pEnd == '\0')
+		{
+			Reverse(pBegin,--pEnd);
+			pBegin = ++pEnd;
+		}
+		else
+		{
+			pEnd++;
+		}
+	}
+	return pData;
+}

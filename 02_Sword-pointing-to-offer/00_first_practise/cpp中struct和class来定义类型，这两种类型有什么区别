@@ -1,0 +1,9 @@
+
+
+data:12:23 Sat Jun 27 2020
+cpp中struct和class来定义类型，这两种类型有什么区别
+
+如果没有表明成员函数或者成员变量的访问权限级别，在struct中默认的是public 而在class中默认的是private
+
+strcut和class的区别是 struct定义的是值类型，值类型的实例在栈伤分配内存；而class定义的是引用类型，引用类型的实例在堆伤分配内存。
+

@@ -1,0 +1,71 @@
+
+
+Date:2020-07-06 09:40
+
+链表是一种动态数据结构。
+当插入一个结点时，我们只需要为新结点分配内存，然后调整指针的指向来确保新结点被链接到链表当中。
+
+struct ListNode
+{
+	int m_nValue;
+	ListNode* m_pNext;
+};
+
+
+往链表的末尾添加新的结点
+
+/*
+第一个参数pHead是一个指向指针的指针。当我们往一个空链表中插入一个结点时，新插入的结点就是链表的头指针。
+由于此时会改动头指针，因此必须把pHead参数设为指向指针的指针，否则出了这个函数pHead仍然是一个空指针。
+ */
+void AddtoTail(ListNode** pHead,int value)
+{
+	ListNode* pNew = new ListNode();
+	pNew->m_nValue = value;
+	pNew->m_pNext = NULL;
+
+	if(*pHead == NULL)
+	{
+		*pHead = pNew;
+	}
+	else
+	{
+		ListNode* pNode = *pHead;
+		while(pNode->m_pNext != NULL)
+			pNode = pNode->m_pNext;
+
+		pNode->m_pNext = pNew;
+	}
+}
+
+
+链表中找到一个含有某值的结点并删除该代码
+
+void RemoveNode(ListNode** pHead,int value)
+{
+	if(pHead == NULL || *pHead == NULL)
+		return;
+
+	ListNode* pToBeDelete = NULL;
+	if((*pHead)->m_nValue == value)
+	{
+		pToBeDelete = *pHead;
+		*pHead = (*pHead)->m_pNext;
+	}
+	else
+	{
+		ListNode* pNode = *pHead;
+		while(pNode->m_pNext != NULL && pNode->m_pNext->m_nValue != value)
+			pNode = pNode->m_pNext;
+		if(pNode->m_pNext != NULL && pNode->m_pNext->m_nValue == value)
+		{
+			pToBeDelete = pNode->m_pNext;
+			pNode->m_pNext = pNode->m_pNext->m_pNext;
+		}
+	}
+	if(pToBeDelete != NULL)
+	{
+		delete pToBeDelete;
+		pToBeDelete = NULL;
+	}
+}
