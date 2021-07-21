@@ -41,6 +41,36 @@ ListNode* ReverseList(ListNode* pHead) {
 	return pReverseHead;
 }
 
+/*
+ * Date:2021-07-21 11:40
+ */
+
+/*
+ * 让pNode的下一个结点指向上一个节点
+ * 更新上一个节点为当前节点(pPre = pNode)
+ * 更新当前节点为下一个节点 pNode = pNext;
+ */
+
+ListNode* ReverseList_2(ListNode *pHead) {
+	if (pHead == NULL) {
+		return NULL;
+	}
+	ListNode *pReverseHead = NULL;
+	ListNode *pNode = pHead;
+	ListNode *pPrev = NULL;
+
+	while (pNode) {
+		ListNode *pNext = pNode->m_pNext;
+		if (pNext == NULL) {
+			pReverseHead = pNode;
+		}
+		pNode->m_pNext = pPrev;
+		pPrev = pNode;
+		pNode = pNext;
+	}
+	return pReverseHead;
+}
+
 int main() {
 	/*
 	ListNode *node3 = NULL,*node2 = NULL,*node1 = NULL,*head = NULL;
@@ -57,7 +87,7 @@ int main() {
 	ListNode *node1 = new ListNode(1,node2);
 	ListNode *head;
 
-	head = ReverseList(node1);
+	head = ReverseList_2(node1);
 	while (head) {
 		cout << head->m_nKey << ' ';
 		head = head->m_pNext;
