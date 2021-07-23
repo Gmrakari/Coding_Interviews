@@ -29,6 +29,11 @@
 #include <exception>
 #include <bits/stdc++.h>
 #include <stdexcept>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
 
 /*
  * 解法一:
@@ -166,6 +171,24 @@ void Test1()
 void Test(char* testName, int* numbers, int length, int expectedValue, bool expectedFlag);
     int numbers[] = {1, 2, 3, 2, 2, 2, 5, 4, 2};
     Test("Test1", numbers, sizeof(numbers) / sizeof(int), 2, false);
+}
+
+int majorityElement(vector<int>& nums) {
+	sort(nums.begin(), nums.end());
+	return nums[nums.size() / 2];
+}
+
+int majorityElement_2(vector<int>& nums) {
+	unordered_map<int, int> count;
+	int cnt = 0, majority = 0;
+	for (auto num : nums) {
+		count[num]++;
+		if (count[num] > cnt) {
+			majority = num;
+			cnt = count[num];
+		}
+	}
+	return majority;
 }
 
 int main() {
