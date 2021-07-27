@@ -190,3 +190,82 @@ int main() {
 	transfer_java m_test;
 	m_test.run();
 }
+
+
+/*
+ * java 
+ *
+ */
+
+
+/*
+package com.gmrakari.test;
+
+public class String_sort_2 {
+    public static void main(String[] args) {
+        String[] input = {"abc", "Abc", "123", "1", "1bc", "CBD", "abcd", "a" };
+        sort(input);
+        for (String s : input) {
+            System.out.print(s + " ");
+        }
+    }
+    private static void sort(String[] input) {
+        quickSort(input, 0, input.length - 1);
+    }
+    private static void quickSort(String[] data, int left, int right) {
+        if (left > right) {
+            return;
+        }
+        int i, j;
+        String t, temp;
+        temp = data[left];
+        i = left;
+        j = right;
+        while (i != j) {
+            while (cmp(data[j], temp) >= 0 && i < j) {
+                j--;
+            }
+            while (cmp(data[i], temp) <= 0 && i < j) {
+                i++;
+            }
+            if (i < j) {
+                t = data[i];
+                data[i] = data[j];
+                data[j] = t;
+            }
+        }
+        data[left] = data[i];
+        data[i] = temp;
+        quickSort(data, left, i - 1);
+        quickSort(data, i + 1, right);
+    }
+    private static int cmp(String left, String right) {
+        if (left.length() != right.length()) {
+            return left.length() - right.length();
+        }
+        int len = left.length();
+        for (int i = 0; i < len; i++) {
+            char l = left.charAt(i);
+            char r = right.charAt(i);
+            if (l == r) {
+                continue;
+            }
+            int lcv = getCharValue(l);
+            int rcv = getCharValue(r);
+            if (lcv != rcv) {
+                return lcv - rcv;
+            }
+        }
+        return 0;
+    }
+    private static int getCharValue(char c) {
+        if (c >= 'a') {
+            return (c - 'a') * 2 + 1;
+        } else if (c >= 'A') {
+            return (c - 'A') * 2;
+        }
+        return c - '0' + 52;
+    }
+}
+
+*/
