@@ -17,7 +17,7 @@ int m_atoi(char* pstr) {
 	int Integer_sign = 1;
 
 	//跳过前面的空格
-	while (isspace(*pstr) == 0) {
+	while (*pstr == ' ') {
 		pstr++;
 	}
 
@@ -57,7 +57,6 @@ void test() {
 	int m_atoi(char *);
 	c = m_atoi(a) + m_atoi(b);
 
-	printf("%d",m_atoi(a));
 	cout << "m_atoi(a) : " << m_atoi(a) << endl;
 	cout << "m_atoi(b) : " << m_atoi(b) << endl;
 
