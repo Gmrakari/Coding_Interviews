@@ -40,6 +40,13 @@ void test() {
 
 	int len = vec.size();
 
+	cout << "before:";
+	for_each(vec.begin(), vec.end(), display<int>());
+	cout << endl;
+	
+	cout << "QuickSort:";
+	void QuickSort(vector<int>& vec, int len);
+	QuickSort(vec, len);
 	for_each(vec.begin(), vec.end(), display<int>());
 	cout << endl;
 
