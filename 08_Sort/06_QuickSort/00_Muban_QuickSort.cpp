@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 /*
@@ -8,44 +9,44 @@ using namespace std;
  * Filename:Muban_QuickSort.cpp
  */
 
-
-void printArray(int array[],int len)
-{
-	for(int i = 0; i < len;i++)
-	{
-		cout << array[i] << " ";
+template <class T>
+struct display {
+	void operator() (const T& x) const {
+		cout << x << ' ';
 	}
+};
+
+int partition(vector<int>& vec, int low, int high) {
+
+}
+
+
+void QSort(vector<int>& vec, int low, int high) {
+	int partition(vector<int>& vec, int low, int high);
+
+}
+
+
+void QuickSort(vector<int>& vec, int len) {
+	void QSort(vector<int>& vec, int low, int high);
+
+}
+
+void test() {
+	void QuickSort(vector<int>& vec, int len);
+	int array[] = {1,3,5,7,9,2,4,6,8,0,12};
+	
+	vector<int> vec(array, array + sizeof(array)/sizeof(int));
+
+	int len = vec.size();
+
+	for_each(vec.begin(), vec.end(), display<int>());
 	cout << endl;
-}
 
-int partition(int array[],int low,int high)
-{
-
-}
-
-void QSort(int array[],int low,int high)
-{
-	int partition(int array[],int low,int high);
-}
-
-void QuickSort(int array[],int len)
-{
-	void QSort(int array[],int low,int high);
 }
 
 int main(int argc,const char* argv[])
 {
-
-	void printArray(int array[],int len);
-	void QuickSort(int array[],int len);
-
-	int array[] = {1,3,5,7,9,2,4,6,8,0,0};
-	int len = sizeof(array)/sizeof(*array);
-
-	printArray(array,len);
-
-	QuickSort(array,len);
-
-	printArray(array,len);
-
+	void test();
+	test();
 }
