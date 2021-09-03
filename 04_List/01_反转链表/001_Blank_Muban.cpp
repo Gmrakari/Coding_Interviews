@@ -32,17 +32,20 @@ ListNode* init() {
 	return pHead;
 }
 
+void Traversal(ListNode *head) {
+	while (head) {
+		cout << head->m_data << ' ';
+		head = head->m_pNext;
+	}
+	cout << endl;
+}
+
 int main(int argc,const char* argv[])
 {
 
 	ListNode *res1 = init();
 	res1 = ReverseList(res1);
-	while(res1 != NULL)
-	{
-		cout << res1->m_data << " ";
-		res1 = res1->m_pNext;
-	}
-	cout << endl;
+	Traversal(res1);
 	return 0;
 }
 
