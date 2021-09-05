@@ -38,7 +38,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -72,6 +72,44 @@ vector<int> QuickSort(vector<int> &vec) {
 	return vec;
 }
 
+template <class T>
+struct display{
+	void operator()(const T& x) const {
+		cout << x << ' ';
+	}
+};
+
+class Solution {
+public:
+	void quickSort(vector<int>& vec, int low, int high)  {
+		if (low >= high)
+			return ;
+
+		int i = low;
+		int j = high;
+		int key = vec[low];
+		while (i < j) {
+			while (i < j && vec[j] > key) {
+				j--;
+			}
+			while (i < j && vec[i] < key) {
+				i++;
+			}
+			if (i < j) {
+				int p = vec[i];
+				vec[i] = vec[j];
+				vec[j] = p;
+			}
+		}
+		int t = vec[i];
+		vec[i] = vec[low];
+		vec[low] = t;
+		quickSort(vec, low, i - 1);
+		quickSort(vec, i + 1, high);
+	}
+};
+
+
 int main() {
 	vector<int> vec;
 	for (int i = 0; i < 10; i++) {
@@ -88,6 +126,26 @@ int main() {
 	for (int i = 0; i <(int)vec.size(); i++) {
 		cout << vec[i] << ' ';
 	}
+	cout << endl;
+
+	vector<int> soVec;
+	for (int i = 0; i < 10; i++) {
+		soVec.emplace_back(random() % 10);
+	}
+	cout << "SoVec generate random element:";
+	/*
+	for (int i = 0; i < (int)soVec.size(); i++) {
+		cout << soVec[i] << ' ';
+	}
+	cout << endl;
+	*/
+	for_each(soVec.begin(), soVec.end(), display<int>());
+	cout << endl;
+
+	cout << "sort:";
+	Solution so;
+	so.quickSort(soVec, 0, soVec.size() - 1);
+	for_each(soVec.begin(), soVec.end(), display<int>());
 	cout << endl;
 
 }
