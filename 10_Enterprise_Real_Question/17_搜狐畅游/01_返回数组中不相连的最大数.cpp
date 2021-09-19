@@ -6,6 +6,13 @@
  *
  */
 
+/*
+ * dp问题
+ * 参考LC-198 打家劫舍
+ * https://leetcode-cn.com/problems/house-robber/
+ *
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 
