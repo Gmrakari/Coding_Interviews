@@ -11,6 +11,7 @@
 #include <functional>
 #include <vector>
 #include <iterator>
+#include <bits/stdc++.h>
 using namespace std;
 
 template <class T>
@@ -22,7 +23,7 @@ struct display {
 
 class Solution {
 	public:
-		vector<int> odd(vector<int> array) {
+		vector<int> odd(vector<int>& array) {
 			auto it = array.begin();
 			for (it = array.begin(); it != array.end(); it++) {
 				if ((*it) & 1) {
@@ -31,14 +32,15 @@ class Solution {
 			}
 			return array;
 		}
-		vector<int> odd_2(vector<int>& array){
+		vector<int> odd_2(vector<int>& arr){
+			vector<int> res;
 			int j = 0;
-			for (int i = 0; i < (int)array.size();++i) {
-				if (array[i] % 2 != 0) {
-					array[j++] = array[i];
+			for (int i = 0; i < (int)arr.size();i++) {
+				if (arr[i] % 2 == 0) {
+					res[j++] = arr[i];
 				}	
 			}
-			return array;
+			return res;
 		}
 
 		void print(vector<int>& vec) {
@@ -49,30 +51,34 @@ class Solution {
 		}
 };
 
+
 int main() {
 	vector<int> vec = {1,2,3,4,5,6,7,8};
-	vector<int> my_te;
+	vector<int> vec_2 = {1,2,3,4,5,6,7,8};
 
-	/*
-		 my_te = odd(vec);
-
-		 for_each(my_te.begin(), my_te.end(),display<int>());
-		 cout << endl;
-
-*/
-
-	/*
-	for_each(vec.begin(), vec.end(),display<int>());
+	cout << "vec:";
+	for_each(vec.begin(), vec.end(), display<int>());
 	cout << endl;
 
-	*/
-
 	Solution fun1;
-	fun1.odd_2(vec);
-	fun1.print(vec);
-
-
+	
+	cout << "oushu_1:";
 	fun1.odd(vec);
 	fun1.print(vec);
 
+	Solution fun2;
+	cout << "oushu_2:";
+	fun2.odd_2(vec_2);
+	fun2.print(vec_2);
 }
+
+/*
+ * 总结:
+ * 除去奇数可以用位运算 
+ * if ( *node & 1 ) {
+ *	为真的话
+ * }
+ * 那么就是个奇数，否则是一个偶数
+ *
+ *
+ */
