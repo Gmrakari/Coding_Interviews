@@ -40,15 +40,46 @@ public:
 			}
 			return res.size();
     }
+    int lengthOfLIS_dp(vector<int>& nums) {
+			if (nums.size() == 0) return 0;
+			int i = 0;
+			vector<int> dp(nums.size() + 1);
+			for(i = 0; i < (int)nums.size();i++) {
+				dp[i] = 1;
+			}
+			int res = 1;
+
+			for (i = 1; i < (int)nums.size();i++) {
+				for (int j = 0;j < i;j++) {
+					if (nums[j] < nums[i]) {
+						dp[i] = max(dp[i], dp[j] + 1);
+					}
+				}
+				res = max(dp[i], res);
+			}
+			return res;
+		}
 };
 
 int main() {
 
 	vector<int> vec = {10,9,2,5,3,7,101,18};
+	vector<int> my_vec = {10,9,2,5,3,7,101,18};
 	vector<int> vec_2 = {0,1,0,3,2,3};
+	vector<int> my_vec_2 = {0,1,0,3,2,3};
 	vector<int> vec_3 = {0,0,0,0,0,0};
+	vector<int> my_vec_3 = {0,0,0,0,0,0};
 	Solution test;
+	cout << "test1: ";
 	cout << test.lengthOfLIS(vec) << endl;
+	cout << test.lengthOfLIS_dp(my_vec) << endl;
+
+	cout << "test2: ";
 	cout << test.lengthOfLIS(vec_2) << endl;
+	cout << test.lengthOfLIS_dp(my_vec_2) << endl;
+	cout << "test3: ";
 	cout << test.lengthOfLIS(vec_3) << endl;
+	cout << test.lengthOfLIS_dp(my_vec_3) << endl;
+
+
 }
