@@ -28,24 +28,31 @@ ListNode* init(){
 	return pHead;
 }
 
-int GetLinkListLength(ListNode *pHead) {
-	int length = 0;
-	while (pHead) {
-		++length;
-		pHead = pHead->next; 
+
+//合并两个链表
+ListNode *LinkList_union(ListNode* phead1, ListNode* phead2) {
+	if (phead1 == NULL)	
+		return phead2;
+	if (phead2 == NULL) 
+		return phead1;
+	ListNode *newhead = phead1;
+
+	while (newhead->next) {
+		newhead = newhead->next;
 	}
-	return length;
-} 
+	newhead->next = phead2;
+	return phead1;
+}
+
+//pos是分段翻转的位置
 ListNode* Sectional_LinkListReverse(ListNode* pHead, int pos) {
 	if (pHead == NULL || pos < 0) {
 		return NULL;
 	}
-	int length = GetLinkListLength(pHead);
 	
 	ListNode* pReverseHead = NULL;
 	ListNode* pPrev = NULL;
 	ListNode* currentNode = pHead;
-	ListNode* newhead = NULL;
 	ListNode* pNode = pHead;
 	
 	for (int i = 0; i < pos; i++ ){
@@ -60,12 +67,7 @@ ListNode* Sectional_LinkListReverse(ListNode* pHead, int pos) {
 		pPrev = pNode;
 		pNode = pNext;
 	}
-	/*
-	while (pReverseHead) {
-		pReverseHead->next =  currentNode;
-		pReverseHead = pReverseHead->next;
-	}
-	*/
+	pReverseHead = LinkList_union(pReverseHead, currentNode);
 	return pReverseHead;
 }
 
@@ -79,11 +81,15 @@ void Traval(ListNode *node) {
 	cout << endl;
 }
 
-int main(int argc, char** argv) {
-	
+void test() {
 	ListNode* head = init();
+
 	Traval(head);
-	//head = Sectional_LinkListReverse(head, 3);
+	head = Sectional_LinkListReverse(head, 3);
 	Traval(head);
+}
+
+int main(int argc, char** argv) {
+	test();	
 	return 0;
 }
