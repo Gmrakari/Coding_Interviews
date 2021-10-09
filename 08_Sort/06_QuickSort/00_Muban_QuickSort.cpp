@@ -4,7 +4,7 @@
 using namespace std;
 
 /*
- * Date:2021-03-10 09:48
+ * Date:2021-10-10 09:48
  * Author:Gmrakari
  * Filename:Muban_QuickSort.cpp
  */
