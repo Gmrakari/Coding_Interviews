@@ -17,7 +17,7 @@ struct display {
 };
 
 int partition(vector<int>& vec, int low, int high) {
-	int pv = vec[high];
+	int pv = vec[low];
 	while (low < high) {
 		while (low < high && pv <= vec[high]) {
 			high--;
