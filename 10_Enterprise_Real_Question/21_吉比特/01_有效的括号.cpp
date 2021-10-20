@@ -82,9 +82,9 @@ namespace m_stack {
 					if (c == '(' || c == '{' || c == '[') stk.push(c);
 					else if (c == ')' && stk.size() && stk.top() == '(')
 						stk.pop();
-					else if (c == '}' && stk.size() && stk.top() == '(')
+					else if (c == '}' && stk.size() && stk.top() == '{')
 						stk.pop();
-					else if (c == ']' && stk.size() && stk.top() == '(')
+					else if (c == ']' && stk.size() && stk.top() == '[')
 						stk.pop();
 					else 
 						return false;
@@ -92,4 +92,30 @@ namespace m_stack {
 				return stk.size() == 0;
 			}
 	};
+}
+
+int main() {
+	m_stack::Solution test;
+	int n;
+	string str;
+	vector<string> res;
+	scanf("%d",&n);
+	for (int i = 0;i < n;i++) {
+		cin >> str;
+		res.push_back(str);
+	}
+	cout << "test1:";
+	Solution using_pairs;
+	for (auto k : res) {
+		cout << using_pairs.isValid(k) << endl;
+	}
+	
+	cout << "test2:";
+	for (auto k : res) {
+		cout << test.isValid(k) << endl;
+	}
+	bool m_false = false;
+	m_false = m_false == 0 ? 0 : 1;
+
+	 cout << "m_false:" << m_false << endl;
 }
