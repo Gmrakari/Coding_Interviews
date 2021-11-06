@@ -50,7 +50,7 @@ class A {
 	 */
 
 vector<int> init() {
-	vector<int> vec = {1,2,3,4,5};
+	vector<int> vec = {1,2,3};
 	return vec;
 }
 
@@ -59,14 +59,48 @@ vector<char> init_string() {
 	return ret;
 }
 
+/*
+ * Update:2021-11-06
+ * Permutation using C
+ */
+
+
+void realize_permutation(char *pstr, char* pBegin) {
+	if (*pBegin == '\0')
+		printf("%s\n",pstr);
+	else {
+		for (char* pch = pBegin;*pch != '\0';++pch) {
+			char temp = *pch;
+			*pch = *pBegin;
+			*pBegin = temp;
+			realize_permutation(pstr, pBegin + 1);
+			temp = *pch;
+			*pch = *pBegin;
+			*pBegin = temp;
+		}
+	}
+}
+
+void permutation_c(char *pstr) {
+	void realize_permutation(char *pstr, char* pBegin);
+	if (pstr == NULL)
+		return ;
+	realize_permutation(pstr, pstr);
+}
 
 int main() {
 	vector<int> ret = init();
 	A<int> test;
 	test.permutation(ret, 0, ret.size() - 1);
 
+	cout << endl;
 	vector<char> ret_char = init_string();
 	A<char> test2;
 	test2.permutation(ret_char, 0, ret_char.size() - 1);
+
+	cout << endl;
+	char str[] = "abc";
+	permutation_c(str);
+
 	return 0;
 }
