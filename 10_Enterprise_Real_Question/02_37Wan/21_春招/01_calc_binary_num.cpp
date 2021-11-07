@@ -32,15 +32,59 @@ int Solution_2(int n)
 	return res;
 }
 
+/*
+ * update:2021-11-07
+ * 思路：将十进制数转换成二进制数再统计1的个数
+ */
+class Calc {
+	public:
+		int transfer(int n) {
+			vector<int> ret;
+			if (n == 0) {
+				return 0;
+			}
+
+			int temp;
+			while (n > 0) {
+				temp = n % 2;
+				n = n / 2;
+				ret.push_back(temp);
+			}
+			int cnt = 0;
+			
+			/*
+			auto first = ret.rbegin();
+			auto last = ret.rend(); 
+			
+			int cnt = 0;
+			while (first != last) {
+				if (*first == 1) {
+					cnt++;
+				}
+				first++;
+			}
+			return cnt;
+			*/
+			for (vector<int>::iterator first = ret.begin(); first != ret.end();first++) {
+				if( *first == 1 ) {
+					cnt++;
+				}
+			}
+			return cnt;
+		}
+};
+
 int main()
 {
 	unsigned int n;
 	cin >> n;
-	int cnt = 0;
 
 	cout << Solution_1(n) << endl;
 
 	cout << Solution_2(n) << endl;
+
+	Calc test;
+	cout << "test:" << test.transfer(n) << endl;
 
 	return 0;
 }
