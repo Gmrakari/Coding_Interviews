@@ -138,6 +138,21 @@ void test10() {
 	cout << "sizeof(int int* char doule int char int):" << sizeof(D) << endl;
 }
 
+struct E {
+	int b;	     //4
+	struct temp {
+		int a;	  //4
+		char b;   //1 -- 4
+		double c; //8
+	}temp;			//4 + 4 + 8 = 16
+};	          //16 + 4 = 20 + 4 => 24
+
+void test11() {
+	cout << "struct of struct sizeof:" << sizeof(E) << endl;
+}
+
+
+
 
 int main() {
 	test1();
@@ -149,6 +164,6 @@ int main() {
 	test7();
 	test8();
 	test9();
-
 	test10();
+	test11();
 }
