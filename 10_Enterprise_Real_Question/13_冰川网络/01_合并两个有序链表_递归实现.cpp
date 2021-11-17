@@ -7,6 +7,7 @@
  */
 
 #include <iostream>
+#include <vector>
 using namespace std;
 struct ListNode
 {
@@ -105,6 +106,65 @@ ListNode *Merge_recursive(ListNode* pHead1, ListNode *pHead2) {
 	return mergehead;
 }
 
+vector<int> Merge_vec(ListNode* pHead1, ListNode* pHead2) {
+
+	int getListLength(ListNode *phead);
+	if (pHead1 == NULL && pHead2 == NULL )
+		//return vector<int>();
+		return {};
+
+
+	if (pHead1 == NULL) {
+		vector<int> ret;
+		while (pHead2) {
+			ret.push_back(pHead2->m_nValue);
+			pHead2 = pHead2->m_pNext;
+		}
+		return ret;
+	}
+	else if (pHead2 == NULL) {
+		vector<int> ret;
+		while(pHead1) {
+			ret.push_back(pHead1->m_nValue);
+			pHead1 = pHead1->m_pNext;
+		}
+		return ret;
+	}
+	int len = getListLength(pHead1) + getListLength(pHead2);
+	vector<int> res;
+	while(pHead1 && pHead2) {
+		if (pHead1->m_nValue < pHead2->m_nValue) {
+			res.push_back(pHead1->m_nValue);
+			pHead1 = pHead1->m_pNext;
+		}
+		else {
+			res.push_back(pHead2->m_nValue);
+			pHead2 = pHead2->m_pNext;
+		}
+	}
+	while (pHead1) {
+		res.push_back(pHead1->m_nValue);
+		pHead1 = pHead1->m_pNext;
+	}
+
+	while (pHead2) {
+		res.push_back(pHead2->m_nValue);
+		pHead2 = pHead2->m_pNext;
+	}
+
+	return res;
+}
+
+int getListLength(ListNode *phead) {
+	int nlength = 0;
+
+	while (phead) {
+		++nlength;
+		phead = phead->m_pNext;
+	}
+	return nlength;
+}
+
 void printlist(ListNode *pHead) {
 	if (pHead == NULL) return ;
 	while (pHead) {
@@ -131,7 +191,20 @@ ListNode *init_2() {
 	return pHead2;
 }
 
-int main() {
+void test() {
+	vector<int> res;
+	ListNode* list1 = init();
+	ListNode* list2 = init_2();
+
+	res = Merge_vec(list1, list2);
+
+	for (auto i : res) {
+		cout << i ;
+	}
+	cout << endl;
+}
+
+void test2() {
 	ListNode *res1 = init();
 	ListNode *res2 = init_2();
 
@@ -161,4 +234,10 @@ int main() {
 	res2 = init_2();
 	ListNode *merge3 = Merge_recursive(res1, res2);
 	printlist(merge3);
+}
+
+int main() {
+	test();
+	cout << endl;
+	test2();
 }
