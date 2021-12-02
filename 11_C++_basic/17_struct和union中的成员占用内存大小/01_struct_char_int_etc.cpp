@@ -160,6 +160,13 @@ void test12() {
 	cout << "bool_type:" << sizeof(bool_type) << endl;
 }
 
+struct float_type {
+	float f_type;
+};
+
+void test13() {
+	cout << "float_type:" << sizeof(float_type) << endl;
+}
 
 
 int main() {
@@ -175,4 +182,5 @@ int main() {
 	test10();
 	test11();
 	test12();
+	test13();
 }
