@@ -152,6 +152,14 @@ void test11() {
 }
 
 
+struct bool_type {
+	bool d;
+};
+
+void test12() {
+	cout << "bool_type:" << sizeof(bool_type) << endl;
+}
+
 
 
 int main() {
@@ -166,4 +174,5 @@ int main() {
 	test9();
 	test10();
 	test11();
+	test12();
 }
