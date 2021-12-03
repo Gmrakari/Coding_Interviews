@@ -58,12 +58,36 @@ public:
 	}
 };
 
+namespace axiu {
+	class Solution {
+		public:
+			string PrintMinNumber(vector<int>& nums) {
+				vector<string> str;
+				for (auto num : nums) {
+					str.push_back(to_string(num));
+				}
+
+				sort(str.begin(), str.end(), [](const string& a, const string& b) { return a + b < b + a; });
+				string ret;
+				for (auto& t : str) {
+					ret += t;
+				}
+				return ret;
+			}
+	};
+}
+
 void test() {
 	int number[] = {3, 32, 321};
 	int length = sizeof(number) / sizeof(number[0]);
 
 	PrintMinNumber1(number, length);
 
+	vector<int> vec(number, number + 3);
+
+	axiu::Solution s;
+	cout << s.PrintMinNumber(vec) << endl;
+	
 }
 
 int main() {
