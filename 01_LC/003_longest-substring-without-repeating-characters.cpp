@@ -42,10 +42,38 @@ class Solution {
 		}
 };
 
+namespace zhuanzhuanjituan {
+	class Solution {
+	public:
+		int lengthOfLongestSubstring(string s) {
+			if (s.size() == 0)
+				return 0;
+
+			unordered_set<char> str;
+			int right = 0;
+			int maxs = 0;
+
+			for (int i = 0; i < (int)s.size(); ++i) {
+				while (right < (int)s.size() && str.count(s[right]) == 0) {
+					str.insert(s[right]);
+					right++;
+				}
+				maxs = max(maxs, right - i);
+				str.erase(s[i]);
+			}
+			return maxs;
+		}
+	};
+	
+}
+
 void test() {
 	string s = "abcde";
 	Solution test;
 	cout << test.lengthOfLongestSubstring(s) << endl;
+
+	zhuanzhuanjituan::Solution test2;
+	cout << test2.lengthOfLongestSubstring(s) << endl;
 }
 
 int main() {
