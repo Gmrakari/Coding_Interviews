@@ -35,8 +35,13 @@ void test() {
 	Solution t;
 	vector<int> vec = {1, 3, 5, 7, 9};
 	vector<int> vec2 = {1, 50, 2, 3, 4, 4};
+
+	vector<int> vec3 = {2,3,4,8,99};
+	vector<int> vec4 = {1,2,3,1,2,3,2,2};
 	cout << t.maxLength(vec) << endl;
 	cout << t.maxLength(vec2) << endl;
+	cout << t.maxLength(vec3) << endl;
+	cout << t.maxLength(vec4) << endl;
 }
 
 int main() {
