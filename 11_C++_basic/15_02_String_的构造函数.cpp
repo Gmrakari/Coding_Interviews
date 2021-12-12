@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <assert.h>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ private:
 inline String::String(const char* cstr) {
 	if (cstr) {
 		m_data = new char[strlen(cstr) + 1];
+		assert(m_data != NULL);
 		strcpy(m_data, cstr);
 
 	} else {
@@ -34,6 +36,7 @@ inline String::String(const char* cstr) {
 
 inline String::String(const String& str) {
 	m_data = new char[strlen(str.m_data) + 1];
+	assert(m_data != NULL);
 	strcpy(m_data, str.m_data);
 }
 
@@ -43,6 +46,7 @@ inline String& String::operator=(const String& str) {
 
 	delete[] m_data;
 	m_data = new char[strlen(str.m_data) + 1];
+	assert(m_data != NULL);
 	strcpy(m_data, str.m_data);
 
 	return *this;
