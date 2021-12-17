@@ -31,23 +31,6 @@ class A {
 		}
 
 };
-/*
-	 void permutation(vector<int> vec, int low, int high) {
-	 if (low == high) {
-	 for (int i = 0;i <= low;i++) {
-	 cout << vec[i];
-	 }
-	 cout << endl;
-	 }
-	 else {
-	 for (int i = low; i <= high;i++) {
-	 swap(vec[i], vec[low]);
-	 permutation(vec, low + 1, high);
-	 swap(vec[i], vec[low]);
-	 }
-	 }
-	 }
-	 */
 
 vector<int> init() {
 	vector<int> vec = {1,2,3};
