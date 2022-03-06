@@ -41,7 +41,6 @@ void test() {
 		for (int j = 0; j < (int)ret[i].size(); j++) {
 			cout << ret[i][j] << " ";
 		}
-		cout << endl;
 	}
 	cout << endl;
 }
