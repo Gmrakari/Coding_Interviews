@@ -97,6 +97,7 @@ struct B {
 
 void test8() {
 	cout << "--------------------------" << endl;
+	cout << "test8():" << endl;
 	cout << "sizeof(double,char,int,char array,pointer,int array):" << sizeof(B) << endl;
 
 	printf("double a address :%p\n",&B_data.a);
