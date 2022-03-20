@@ -57,3 +57,9 @@ int main() {
 	pa->print_age();
 	return 0;
 }
+
+
+//output:
+//22000
+//22000
+//Miao, my age = 1
