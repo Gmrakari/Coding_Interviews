@@ -15,7 +15,7 @@ public:
 		echo();
 	}
 	virtual void echo() {
-		printf("Base");
+		printf("Base\n");
 	}
 };
 
@@ -24,8 +24,8 @@ public:
 	Derived() {
 		echo();
 	}
-	virtual void echo {
-		printf("Derived");
+	virtual void echo() {
+		printf("Derived\n");
 	}
 };
 
@@ -34,3 +34,15 @@ int main() {
 	base->echo();
 	return 0;
 }
+
+//output:
+//Base
+//Derived
+//Derived
+
+//因为new Derived() 先构造父类的构造函数即Base()中的echo();
+//然后构造派生类中的构造函数即Derived::echo();
+//然后base是Base*的一个对象，在Base中echo被定义为虚函数，表现出多态，实际上调用的是
+//(*(p->vptr)[n])(p) or (*p->vptr[n])(p);
+//即Derived::echo();
+//Derived::echo(&base)
