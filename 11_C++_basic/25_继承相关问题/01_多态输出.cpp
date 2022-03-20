@@ -47,10 +47,13 @@ int main() {
 	cat kitty;
 	dog jd;
 	animal *pa;
-	int *p = (int*)(&kitty);
-	int *q = (int*)(&jd);
-	p[0] = q[0];
-	pa = &kitty;
+	int *p = (int*)(&kitty); //p->(cat)kitty;
+	int *q = (int*)(&jd);    //q->(dog)jd;
+	p[0] = q[0];						//p = q; // p->(dog)jd;
+	pa = &kitty;						//dog::print_age(); 
 	pa->print_age();
 	return 0;
 }
+
+//output:
+//Wang, my age = 1
