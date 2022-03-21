@@ -20,14 +20,15 @@ class Solution {
 public:
 	ListNode* reverse(ListNode* phead) {
 		if (phead == NULL) return NULL;
+		//保存cur的下一个节点
 		ListNode* temp;
 		ListNode* cur = phead;
 		ListNode* prev = NULL;
 
 		while (cur) {
-			temp = cur->next;
-			cur->next = prev;
-			prev = cur;
+			temp = cur->next; //保存一下cur的下一个节点，因为接下来要改变cur->next;
+			cur->next = prev;//翻转操作
+			prev = cur;//更新prev和cur
 			cur = temp;
 		}
 		return prev;
@@ -52,7 +53,9 @@ public:
 		if (phead->next == NULL)
 			return phead;
 
+		//递归调用，翻转第二个节点开始往后的结点
 		ListNode *tmp = recursion_reverselist(phead->next);
+		//翻转头节点与第二个节点的指向
 		phead->next->next = phead;
 		phead->next = NULL;
 
