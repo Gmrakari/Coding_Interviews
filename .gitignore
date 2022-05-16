@@ -36,4 +36,4 @@
 *.app
 
 # doc files and directory
-/doc
+leetcode/editor/cn/doc
