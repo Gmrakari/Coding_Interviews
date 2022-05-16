@@ -10,3 +10,4 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 add_executable(Two-Sum "leetcode/editor/cn/Two-Sum.cpp")
+add_executable(Longest-Substring-Without-Repeating-Characters leetcode/editor/cn/Longest-Substring-Without-Repeating-Characters.cpp)
