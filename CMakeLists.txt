@@ -15,3 +15,5 @@ add_executable(merge-two-sorted-list leetcode/editor/cn/merge-two-sorted-list.cp
 add_executable(Reverse-Linked-List "leetcode/editor/cn/Reverse-Linked-List.cpp")
 add_executable(Sort-an-Array leetcode/editor/cn/Sort-an-Array.cpp)
 add_executable(getKthLastNode leetcode/editor/cn/getKthLastNode.cpp)
+add_executable(virtual_polymorphism_output leetcode/editor/cn/altobeam_05_25/virtual_polymorphism_output.cpp)
+add_executable(strcpy_and_filterstr leetcode/editor/cn/justcall_05_26/strcpy_and_filterstr.c)
