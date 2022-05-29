@@ -18,6 +18,8 @@
 #include <algorithm>
 #include "linklist.h"
 
+#include <set>
+
 using namespace std;
 
 #endif //CODING_INTERVIEWS_HEADERS_H
