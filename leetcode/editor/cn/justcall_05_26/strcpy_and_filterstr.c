@@ -37,13 +37,10 @@ void test_strcpy() {
 void fliterStr(char *linputStr, long lInputLen, char *lOutputStr) {
     if (linputStr == NULL || lInputLen < 0) return;
     long k = 0;
-    //memset(lOutputStr, 0, sizeof(lOutputStr));
     for (long i = 0; i < lInputLen; i++) {
        for (int j = 1; j < lInputLen - 1; j++) {
            if (linputStr[i] != linputStr[j]) {
-               m_strcpy(lOutputStr, linputStr);
-               k++;
-               //lOutputStr[k++] = linputStr[i];
+               lOutputStr[k++] = linputStr[i];
                break;
            } {
                continue;
@@ -67,9 +64,7 @@ void test_fliterStr() {
     long len = sizeof(input) / sizeof(input[0]);
     fliterStr(input, len, output);
 
-    for (int i = 0; output[i] != '\0';i++) {
-        printf("%c", output[i]);
-    }
+    printf("%s",output);
     printf("\n");
 
 }
@@ -82,6 +77,7 @@ void test_fliterStr() {
  */
 
 int main() {
-    //test_fliterStr();
-    test_str();
+    test_fliterStr();
+    //test_strcpy();
+    //test_str();
 }
