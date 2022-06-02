@@ -17,6 +17,7 @@ add_executable(Sort-an-Array leetcode/editor/cn/Sort-an-Array.cpp)
 add_executable(getKthLastNode leetcode/editor/cn/getKthLastNode.cpp)
 add_executable(virtual_polymorphism_output leetcode/editor/cn/altobeam_05_25/virtual_polymorphism_output.cpp)
 add_executable(strcpy_and_filterstr leetcode/editor/cn/justcall_05_26/strcpy_and_filterstr.c)
-add_executable(fliterStr leetcode/editor/cn/justcall_05_26/fliterStr.cpp leetcode/editor/cn/justcall_05_26/fliterStr.cpp)
+add_executable(fliterStr leetcode/editor/cn/justcall_05_26/fliterStr.cpp leetcode/editor/cn/justcall_05_26/fliterStr.cpp
+add_executable(QuickSort_in_C leetcode/editor/cn/QuickSort_in_C.c
 add_executable(sizeof_struct_and_strlen_etc leetcode/editor/cn/justcall_05_26/sizeof_struct_and_strlen_etc.
 add_executable(sizeof_structA_B leetcode/editor/cn/ouryun_06_01/sizeof_structA_B.c
